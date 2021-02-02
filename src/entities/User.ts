@@ -14,8 +14,8 @@ import {
 import bcrypt from "bcrypt";
 import Chat from "./Chat";
 import Message from "./Message";
+// import Verification from "./Verification";
 import Ride from "./Ride";
-import Verification from "./Verification";
 
 const BCRYPT_ROUNDS = 10;
 
@@ -23,8 +23,8 @@ const BCRYPT_ROUNDS = 10;
 class User extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
 
-  @Column({ type: "text", unique: true })
-  email: string;
+  @Column({ type: "text", nullable: true })
+  email: string | null;
 
   @Column({ type: "boolean", default: false })
   verifiedEmail: boolean;
@@ -38,10 +38,10 @@ class User extends BaseEntity {
   @Column({ type: "int" })
   age: number;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   password: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   phoneNumber: string;
 
   @Column({ type: "boolean", default: false })
@@ -49,6 +49,9 @@ class User extends BaseEntity {
 
   @Column({ type: "text" })
   profilePhoto: string;
+
+  @Column({ type: "text", nullable: true })
+  fbID: string;
 
   @Column({ type: "boolean", default: false })
   isDriving: boolean;
@@ -80,8 +83,8 @@ class User extends BaseEntity {
   @OneToMany((type) => Ride, (ride) => ride.driver)
   ridesAsDriver: Ride[];
 
-  @OneToMany((type) => Verification, (verification) => verification.user)
-  verificattions: Verification[];
+  // @OneToMany((type) => Verification, (verification) => verification.user)
+  // verificattions: Verification[];
 
   @CreateDateColumn() createdAt: string;
   @UpdateDateColumn() updatedAt: string;

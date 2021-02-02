@@ -5,11 +5,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToOne,
+  // ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import User from "./User";
+// import User from "./User";
 
 const PHONE = "PHONE";
 const EMAIL = "EMAIL";
@@ -27,17 +27,20 @@ class Verification extends BaseEntity {
   @Column({ type: "text" })
   key: string;
 
-  @ManyToOne((type) => User, (user) => user.verificattions)
-  user: User;
-
   @Column({ type: "boolean", default: false })
-  used: boolean;
+  verified: boolean;
+
+  // @ManyToOne((type) => User, (user) => user.verificattions, { nullable: true })
+  // user: User;
+
+  // @Column({ type: "boolean", default: false })
+  // used: boolean;
 
   @CreateDateColumn() createdAt: string;
   @UpdateDateColumn() updatedAt: string;
 
   @BeforeInsert()
-  private createKey(): void {
+  createKey(): void {
     if (this.target === PHONE) {
       this.key = Math.floor(Math.random() * 100000).toString();
     } else if (this.target === EMAIL) {

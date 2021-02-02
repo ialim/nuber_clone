@@ -9,6 +9,7 @@ type User {
   phoneNumber: String
   verifiedPhoneNumber: Boolean!
   profilePhoto: String
+  fbID: String
   fullName: String
   isDriving: Boolean!
   isRiding: Boolean!
@@ -20,7 +21,7 @@ type User {
   messages: [Message]
   ridesAsPassenger: [Ride]
   ridesAsDriver: [Ride]
-  verifications: [verification]
+  #   verifications: [verification]
   createdAt: String!
   updatedAt: String
 }
